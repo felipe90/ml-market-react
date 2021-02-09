@@ -5,13 +5,14 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
+	  "test": "react-scripts test",
+	  "eject": "react-scripts eject",
+	  "lint": "eslint --ext js src && stylelint \"src/**/*.scss\"",
     "start:front": "react-scripts start",
     "start:static": "node src/static/server.js",
     "start:dev": "concurrently -k -n app,server \"npm run start:front\" \"npm run start:static\"",
     "build:front": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext js src && stylelint \"src/**/*.scss\""
+	  "test:front": "npm test -- --coverage"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",

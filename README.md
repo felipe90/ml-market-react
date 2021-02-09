@@ -12,7 +12,7 @@ Run `npm run lint` to execute lint of .ts files and also use [StyleLint](https:/
 
 ## Running unit tests
 
-Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io) and check code coverage into de folder `coverage`
+Run `npm run test:front` to execute the unit tests via [Jestjs](https://jestjs.io/) and check code coverage into de folder `coverage`
 
 ## Building production
 
