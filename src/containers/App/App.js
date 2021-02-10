@@ -1,6 +1,5 @@
-import "./App.css";
 import { React, useState } from "react";
-
+import SearchProducts from "../../components/SearchProducts/SearchProducts";
 const App = () => {
   const [titleState, setTitleState] = useState({
     title: "ml market",
@@ -18,6 +17,9 @@ const App = () => {
         <h1>{titleState.title}</h1>
         <p>this will be my passport to a new work</p>
         <button onClick={switchTitleHandler}>hi!!!</button>
+
+        <SearchProducts></SearchProducts>
+        {/* <router-outlet></router-outlet> */}
       </header>
     </div>
   );
