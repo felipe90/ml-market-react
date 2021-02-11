@@ -1,0 +1,54 @@
+@import "/src/variables.scss";
+
+.SearchProducts {
+  display: block;
+  width: 100%;
+  background-color: $search-bar-color;
+  padding: 0.5rem 0;
+
+  .search-product-container {
+    width: $content-container-width;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .img-logo {
+    align-self: flex-start;
+    margin: auto 0;
+    width: 3.75rem;
+  }
+
+  .search-autocomplete {
+    align-self: flex-end;
+    margin: 0 0 0 2rem;
+    flex-grow: 2;
+
+    .search-button {
+      background-color: $search-btn-background-color;
+      color: $font-color;
+      border: 1px $search-btn-background-color solid;
+    }
+
+    .p-autocomplete .p-inputtext {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .search-autocomplete .search-button {
+    .p-button {
+      background-color: $search-btn-background-color;
+    }
+
+    .p-button:enabled:hover {
+      background-color: $font-color;
+    }
+
+    .p-button:enabled:hover .p-button-icon {
+      color: $search-btn-background-color;
+    }
+  }
+}
