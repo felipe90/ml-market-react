@@ -7,6 +7,7 @@ import { ItemsRequestService } from "../../services/ItemsRequestService";
 import classes from "./SearchProducts.module.scss";
 
 const SearchProducts = (props) => {
+  const itemsRequestService = new ItemsRequestService();
   const history = useHistory();
 
   const ITEMS_URL = "/items?search=";
@@ -14,7 +15,6 @@ const SearchProducts = (props) => {
 
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [suggestions, setSuggestions] = useState(null);
-  const itemsRequestService = new ItemsRequestService();
 
   /**
    * Search product name suggestions
@@ -58,17 +58,17 @@ const SearchProducts = (props) => {
     // TODO
     // if (!query || this.productService.checkCacheSearch(query)) return;
     if (!query) return;
-
-    let url = "";
+    const params = new URLSearchParams();
+    // /items?search=
 
     if (typeof query === "string") {
-      url = `${ITEMS_URL}${query}`;
+      params.append("search", query);
     }
     if (typeof query === "object") {
-      url = `${ITEMS_URL}${query.q}`;
+      params.append("search", query.q);
     }
 
-    history.push(url);
+    history.push({ search: params.toString() });
   };
 
   return (

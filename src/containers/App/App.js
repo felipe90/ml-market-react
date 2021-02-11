@@ -37,7 +37,7 @@ const App = () => {
               <Route exact path="/">
                 home
               </Route>
-              <Route path="/items?search=:query">
+              <Route path="/items">
                 <ProductListPage></ProductListPage>
               </Route>
               <Route path="/items/:id">
