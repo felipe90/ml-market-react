@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import { AutoComplete } from "primereact/autocomplete";
 import { Button } from "primereact/button";
 import { ItemsRequestService } from "../../services/ItemsRequestService";
 import classes from "./SearchProducts.module.scss";
 
 const SearchProducts = (props) => {
+  const history = useHistory();
+
   const ITEMS_URL = "/items?search=";
   const SEARCH_PLACEHOLDER = "Nunca pares de buscar";
 
@@ -27,7 +31,7 @@ const SearchProducts = (props) => {
   };
 
   /**
-   * // TODO
+   * Search product event handler
    * @param {event} event
    */
   const searchProducts = (event) => {
@@ -43,8 +47,7 @@ const SearchProducts = (props) => {
    * Go home url
    */
   const goToHome = () => {
-    // this.selectedValue = '';
-    // this.router.navigate(['/'], { relativeTo: this.route });
+    history.push("/items");
   };
 
   /**
@@ -65,9 +68,7 @@ const SearchProducts = (props) => {
       url = `${ITEMS_URL}${query.q}`;
     }
 
-    console.log(url);
-    // TODO
-    // this.router.navigateByUrl(url, { relativeTo: this.route });
+    history.push(url);
   };
 
   return (
@@ -77,7 +78,7 @@ const SearchProducts = (props) => {
           className="img-logo"
           alt="Mercadolibre Logo"
           src={"/img/Logo_ML@2x.png.png"}
-          onClick={props.goToHome}
+          onClick={goToHome}
         />
         <section className="p-inputgroup search-autocomplete">
           <AutoComplete
