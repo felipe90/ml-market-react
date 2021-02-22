@@ -2,14 +2,18 @@
 
 .SearchProducts {
   display: block;
-  width: 100%;
   background-color: $search-bar-color;
   padding: 0.5rem 0;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  position: fixed;
+  top: 0;
+  width: 100%;
 
   .search-product-container {
     width: $content-container-width;
     margin: 0 auto;
-    display: flex;
+    display: flex; 
     flex-flow: row;
     align-items: center;
     justify-content: space-between;
@@ -39,15 +43,11 @@
   }
 
   .search-autocomplete .search-button {
-    .p-button {
-      background-color: $search-btn-background-color;
+    &:enabled:hover {
+      background-color: $primary-btn-background-color;
     }
 
-    .p-button:enabled:hover {
-      background-color: $font-color;
-    }
-
-    .p-button:enabled:hover .p-button-icon {
+    &:enabled:hover .p-button-icon {
       color: $search-btn-background-color;
     }
   }

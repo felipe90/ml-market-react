@@ -4,13 +4,12 @@ import { useHistory } from "react-router-dom";
 import { AutoComplete } from "primereact/autocomplete";
 import { Button } from "primereact/button";
 import { ItemsRequestService } from "../../services/ItemsRequestService";
-import classes from "./SearchProducts.module.scss";
+import "./SearchProducts.scss";
 
 const SearchProducts = (props) => {
   const itemsRequestService = new ItemsRequestService();
   const history = useHistory();
 
-  const ITEMS_URL = "/items?search=";
   const SEARCH_PLACEHOLDER = "Nunca pares de buscar";
 
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
@@ -72,7 +71,7 @@ const SearchProducts = (props) => {
   };
 
   return (
-    <section className={classes.SearchProducts}>
+    <section className="SearchProducts">
       <div className="search-product-container">
         <img
           className="img-logo"
@@ -97,7 +96,7 @@ const SearchProducts = (props) => {
           <Button
             type="button"
             icon="pi pi-search"
-            className="p-button-secondary search-button"
+            className="search-button"
             onClick={searchProducts}
           ></Button>
         </section>
