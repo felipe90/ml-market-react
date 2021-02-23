@@ -2,7 +2,6 @@ import axios from "axios";
 import config from "../assets/config/config.json";
 
 const API_URL = `${config.host}:${config.port}${config.api}`;
-
 export class ItemsRequestService {
   /**
    * Get a data of products in a list

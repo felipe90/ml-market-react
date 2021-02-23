@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { AutoComplete } from "primereact/autocomplete";
-import { Button } from "primereact/button";
 import { ItemsRequestService } from "../../services/ItemsRequestService";
-import "./SearchProducts.scss";
+import SearchBar from "../../components/SearchBar/SearchBar";
+
+import classes from "./SearchProducts.module.scss";
 
 const SearchProducts = (props) => {
   const itemsRequestService = new ItemsRequestService();
   const history = useHistory();
-
-  const SEARCH_PLACEHOLDER = "Nunca pares de buscar";
 
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [suggestions, setSuggestions] = useState(null);
@@ -18,14 +16,14 @@ const SearchProducts = (props) => {
   /**
    * Search product name suggestions
    */
-  const searchSuggestions = () => {
+  const searchSuggestionsHandler = () => {
     itemsRequestService
       .getSuggestedQueries(selectedSuggestion)
       .then((res) => {
         setSuggestions(res.data.suggested_queries);
       })
       .catch((e) => {
-        console.log(e);
+        throw new Error(e);
       });
   };
 
@@ -33,7 +31,7 @@ const SearchProducts = (props) => {
    * Search product event handler
    * @param {event} event
    */
-  const searchProducts = (event) => {
+  const searchProductsHandler = (event) => {
     if (
       (event.type === "keyup" && event.keyCode === 13) ||
       event.type === "click"
@@ -45,7 +43,7 @@ const SearchProducts = (props) => {
   /**
    * Go home url
    */
-  const goToHome = () => {
+  const goToHomeHandler = () => {
     history.push("/items");
   };
 
@@ -67,40 +65,20 @@ const SearchProducts = (props) => {
       params.append("search", query.q);
     }
 
+    // props.changeSearchQuery(params.toString());
     history.push({ search: params.toString() });
   };
 
   return (
-    <section className="SearchProducts">
-      <div className="search-product-container">
-        <img
-          className="img-logo"
-          alt="Mercadolibre Logo"
-          src={"/img/Logo_ML@2x.png.png"}
-          onClick={goToHome}
-        />
-        <section className="p-inputgroup search-autocomplete">
-          <AutoComplete
-            value={selectedSuggestion}
-            suggestions={suggestions}
-            completeMethod={searchSuggestions}
-            field="q"
-            onChange={(e) => setSelectedSuggestion(e.value)}
-            onKeyUp={searchProducts}
-            onSelect={searchProducts}
-            placeholder={SEARCH_PLACEHOLDER}
-            ariaLabel="search suggestion input"
-            inputId="search-input"
-            minLength={2}
-          />
-          <Button
-            type="button"
-            icon="pi pi-search"
-            className="search-button"
-            onClick={searchProducts}
-          ></Button>
-        </section>
-      </div>
+    <section className={classes.SearchProducts}>
+      <SearchBar
+        suggestions={suggestions}
+        selectedSuggestion={selectedSuggestion}
+        searchSuggestions={searchSuggestionsHandler.bind(this)}
+        goToHome={goToHomeHandler.bind(this)}
+        searchProducts={searchProductsHandler.bind(this)}
+        setSelectedSuggestion={setSelectedSuggestion}
+      />
     </section>
   );
 };
