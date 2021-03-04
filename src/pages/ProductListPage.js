@@ -1,41 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { ItemsRequestService } from "../services/ItemsRequestService";
-import ProductList from "../components/ProductList/ProductList";
+import { ItemsRequestService } from '../services/ItemsRequestService'
+import ProductList from '../components/ProductList/ProductList'
 
 const ProductListPage = (props) => {
-  const [products, setProducts] = useState([]);
-  const itemsRequestService = new ItemsRequestService();
-  const params = useParams();
-  const history = useHistory();
-  let location = useLocation();
+  const [products, setProducts] = useState([])
+  const itemsRequestService = new ItemsRequestService()
+  let location = useLocation()
 
   useEffect(() => {
-    return history.listen((location) => {
-      console.log(`You changed the page to: ${location.pathname}`);
-    });
-  }, [history]);
+    getProductList(new URLSearchParams(location.search).get('search'))
+  }, [location])
 
   useEffect(() => {
-      console.log(`You changed the page to: ${location.pathname}`);
-  }, [location]);
+    getProductList(props.searchQuery)
+  }, [props.searchQuery])
 
-  const getProductList = () => {
+  const getProductList = (query) => {
+    if (!query) {
+      return
+    }
     itemsRequestService
-      .getProductList({ q: "ipad" })
+      .getProductList({ q: query })
       .then((res) => {
-        setProducts(res.items);
+        setProducts(res.data.items)
       })
       .catch((e) => {
-        console.log(e);
-      });
-  };
+        console.log(e)
+      })
+  }
 
-  return (
-    <section>
-      <ProductList products={products}></ProductList>
-    </section>
-  );
-};
-export default ProductListPage;
+  return <ProductList products={products}></ProductList>
+}
+export default ProductListPage

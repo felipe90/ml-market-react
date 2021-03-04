@@ -1,0 +1,12 @@
+@import '/src/variables.scss';
+
+.ProductListItem {
+  display: block;
+  width: $content-container-width;
+  margin: 0 auto;
+}
+
+.ItemProperties {
+  margin: 1.5rem 1rem;
+  width: 60%;
+}

@@ -66,10 +66,10 @@ const fromAvailableFiltersToCategories = (availableFilters) => {
   if (!availableFilters) {
     return;
   }
-  const categories = availableFilters.find((filter) => filter.id === "category")
-    .values;
 
-  return categories.map((item) => item.name);
+  const categories = availableFilters.find((filter) => filter.id === "category") 
+
+  return categories ? categories.values.map((item) => item.name) : [];
 };
 
 const fromPicturesArrayToPicturesUrlArray = (pictures) => {

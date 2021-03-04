@@ -7,11 +7,11 @@ import {
   LOGO_ALT_LABEL,
   LOGO_SRC,
 } from "../../assets/constants/app.constants";
+import WithClass from '../../hoc/WithClass'
 
 import "./SearchBar.scss";
 
 const SearchBar = (props) => {
-  console.log(SEARCH_PLACEHOLDER)
   return (
     <div className="SearchBar">
       <img
@@ -20,7 +20,7 @@ const SearchBar = (props) => {
         src={LOGO_SRC}
         onClick={props.goToHome}
       />
-      <section className="p-inputgroup search-autocomplete">
+      <WithClass className="p-inputgroup search-autocomplete">
         <AutoComplete
           value={props.selectedSuggestion}
           suggestions={props.suggestions}
@@ -40,7 +40,7 @@ const SearchBar = (props) => {
           className="search-button"
           onClick={props.searchProducts}
         ></Button>
-      </section>
+      </WithClass>
     </div>
   );
 };

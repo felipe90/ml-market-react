@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import WithClass from '../../hoc/WithClass'
 
 import { ItemsRequestService } from "../../services/ItemsRequestService";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -52,11 +53,8 @@ const SearchProducts = (props) => {
    * @param {string} query
    */
   const _performSearch = (query) => {
-    // TODO
-    // if (!query || this.productService.checkCacheSearch(query)) return;
     if (!query) return;
     const params = new URLSearchParams();
-    // /items?search=
 
     if (typeof query === "string") {
       params.append("search", query);
@@ -65,12 +63,13 @@ const SearchProducts = (props) => {
       params.append("search", query.q);
     }
 
-    // props.changeSearchQuery(params.toString());
-    history.push({ search: params.toString() });
+    props.changeSearchQuery(params.toString());
+    // history.push("/items", { search: params.toString() });
+    history.push(`/items?${params.toString()}`);
   };
 
   return (
-    <section className={classes.SearchProducts}>
+    <WithClass className={classes.SearchProducts}>
       <SearchBar
         suggestions={suggestions}
         selectedSuggestion={selectedSuggestion}
@@ -79,7 +78,7 @@ const SearchProducts = (props) => {
         searchProducts={searchProductsHandler.bind(this)}
         setSelectedSuggestion={setSelectedSuggestion}
       />
-    </section>
+    </WithClass>
   );
 };
 

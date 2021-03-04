@@ -1,65 +1,53 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import WithClass from '../../hoc/WithClass'
+import classes from './ProductListItem.module.scss'
+
+import { FREE_SHIPPING_SRC } from '../../assets/constants/app.constants'
 
 const ProductListItem = (props) => {
-  //   <a class="item-img" [routerLink]="['/items', product.id]" routerLinkActive="active">
-  //   <img [src]="product.pictures[0]" alt="{{ product.title }}" />
-  // </a>
-  // <section class="item-props">
-  //   <section class="item-price">
-  //     <h3>
-  //       {{
-  //         product.price?.amount
-  //           | currency: product.price.currency:"symbol-narrow":"4.0"
-  //       }}
-  //     </h3>
-  //     <img
-  //       src="assets/img/ic_shipping.png"
-  //       *ngIf="product.free_shipping"
-  //       aria-label="free-shipping"
-  //       alt="{{ product.title }}" />
-  //   </section>
-  //   <h2>{{ product.title }}</h2>
-  //   <p>{{ product.title }}</p>
-  //   <p *ngIf="product.condition">
-  //     {{ product.condition === "new" ? "Nuevo" : null }}
-  //     {{ product.condition === "used" ? "Usado" : null }}
-  //   </p>
-  // </section>
-  // <
+  const render = () => {
+    const shippingImg = props.data.free_shipping ? (
+      <img
+        src={FREE_SHIPPING_SRC}
+        aria-label="free-shipping"
+        alt={props.data.title}
+      />
+    ) : null
 
-  return (
-    <div>
-      {/* <a class="item-img" [routerLink]="['/items', product.id]" routerLinkActive="active"> */}
-      <img src={props.data.pictures[0]} alt={props.data.title} />
-      {/* </a> */}
-      {/* <section class="item-props">
-         <section class="item-price">
-           <h3>
-             {{
-               product.price?.amount
-                 | currency: product.price.currency:"symbol-narrow":"4.0"
-             }}
-           </h3>
-           <img
-             src="assets/img/ic_shipping.png"
-             *ngIf="product.free_shipping"
-             aria-label="free-shipping"
-             alt="{{ product.title }}" />
-         </section>
-         <h2>{{ product.title }}</h2>
-         <p>{{ product.title }}</p>
-         <p *ngIf="product.condition">
-           {{ product.condition === "new" ? "Nuevo" : null }}
-           {{ product.condition === "used" ? "Usado" : null }}
-         </p>
-       </section>
-      </section> */}
-      <section class="item-location">
-        <h3>
-          {props.data.address.city_name}, {props.data.address.state_name}
-        </h3>
-      </section>
-    </div>
-  )
+    const condition = props.data.condition ? (
+      <p>
+        {props.data.condition === 'new' ? 'Nuevo' : null}
+        {props.data.condition === 'used' ? 'Usado' : null}
+      </p>
+    ) : null
+
+    return (
+      <WithClass className={classes.ProductListItem}>
+        <Link to={`/items/${props.data.id}`}>
+          <img src={props.data.pictures[0]} alt={props.data.title} />
+        </Link>
+        <WithClass className={classes.ItemProperties}>
+          <section className="item-price">
+            <h3>
+              {props.data.price?.amount}
+              {/*TODO | currency: product.price.currency:"symbol-narrow":"4.0" */}
+            </h3>
+            {shippingImg}
+            <h2>{props.data.title}</h2>
+            <p>{props.data.title}</p>
+            {condition}
+          </section>
+        </WithClass>
+        <section class="item-location">
+          <h3>
+            {props.data.address.city_name}, {props.data.address.state_name}
+          </h3>
+        </section>
+      </WithClass>
+    )
+  }
+
+  return render()
 }
 export default ProductListItem
