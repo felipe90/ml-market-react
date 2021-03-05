@@ -24,11 +24,11 @@ const ProductListItem = (props) => {
 
     return (
       <WithClass className={classes.ProductListItem}>
-        <Link to={`/items/${props.data.id}`}>
+        <Link to={`/items/${props.data.id}`} className={classes.ItemImage}>
           <img src={props.data.pictures[0]} alt={props.data.title} />
         </Link>
         <WithClass className={classes.ItemProperties}>
-          <section className="item-price">
+          <WithClass className={classes.ItemPrice}>
             <h3>
               {props.data.price?.amount}
               {/*TODO | currency: product.price.currency:"symbol-narrow":"4.0" */}
@@ -37,9 +37,9 @@ const ProductListItem = (props) => {
             <h2>{props.data.title}</h2>
             <p>{props.data.title}</p>
             {condition}
-          </section>
+          </WithClass>
         </WithClass>
-        <section class="item-location">
+        <section className={classes.ItemLocation}>
           <h3>
             {props.data.address.city_name}, {props.data.address.state_name}
           </h3>

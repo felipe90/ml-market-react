@@ -21,7 +21,7 @@ export class ItemsRequestService {
    */
   getProduct(itemId) {
     return axios.get(
-      `http://${this.API_URL}${config.productEndpoint}/${itemId}`
+      `http://${API_URL}${config.productsEndpoint}/${itemId}`
     );
   }
 

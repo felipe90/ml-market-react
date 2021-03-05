@@ -8,6 +8,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./index.scss";
 import "./variables.scss";
+import 'primeflex/primeflex.css';
 
 ReactDOM.render(
   <React.StrictMode>

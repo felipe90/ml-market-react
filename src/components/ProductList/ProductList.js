@@ -17,9 +17,11 @@ const ProductList = (props) => {
           <Card>
             {props.products.map((product, index) => {
               return (
-                <div>
-                  <ProductListItem data={product} key={index} />
-                  {index !== props.products.length - 1 ? <Divider /> : null}
+                <div key={product.id}>
+                  <ProductListItem data={product}/>
+                  {index !== props.products.length - 1 ? (
+                    <Divider />
+                  ) : null}
                 </div>
               )
             })}

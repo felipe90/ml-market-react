@@ -5,7 +5,6 @@ import { ItemsRequestService } from '../services/ItemsRequestService'
 import ProductList from '../components/ProductList/ProductList'
 
 const ProductListPage = (props) => {
-  const [products, setProducts] = useState([])
   const itemsRequestService = new ItemsRequestService()
   let location = useLocation()
 
@@ -24,13 +23,13 @@ const ProductListPage = (props) => {
     itemsRequestService
       .getProductList({ q: query })
       .then((res) => {
-        setProducts(res.data.items)
+        props.setProductsList(res.data.items)
       })
       .catch((e) => {
         console.log(e)
       })
   }
 
-  return <ProductList products={products}></ProductList>
+  return <ProductList products={props.productsList}></ProductList>
 }
 export default ProductListPage
