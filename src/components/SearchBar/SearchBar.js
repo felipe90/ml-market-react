@@ -13,7 +13,7 @@ import "./SearchBar.scss";
 
 const SearchBar = (props) => {
   return (
-    <div className="SearchBar p-col-8">
+    <div className="SearchBar p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
       <img
         className="img-logo"
         alt={LOGO_ALT_LABEL}

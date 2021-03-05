@@ -70,8 +70,8 @@ const SearchProducts = (props) => {
 
   return (
     <WithClass className={classes.SearchProducts}>
-      <div className="p-grid">
-        <div className="p-col-2"></div>
+      <div className="p-grid p-justify-around">
+        {/* <div className="p-sm-0 p-md-2 p-lg-2"></div> */}
         <SearchBar
           suggestions={suggestions}
           selectedSuggestion={selectedSuggestion}
@@ -80,7 +80,7 @@ const SearchProducts = (props) => {
           searchProducts={searchProductsHandler.bind(this)}
           setSelectedSuggestion={setSelectedSuggestion}
         />
-        <div className="p-col-2"></div>
+        {/* <div className="p-sm-0 p-md-2 p-lg-2"></div> */}
       </div>
     </WithClass>
   )

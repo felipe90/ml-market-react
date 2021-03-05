@@ -20,6 +20,10 @@ const ProductListPage = (props) => {
     if (!query) {
       return
     }
+
+    //reset product list items 
+    props.setProductsList([]);
+    
     itemsRequestService
       .getProductList({ q: query })
       .then((res) => {
