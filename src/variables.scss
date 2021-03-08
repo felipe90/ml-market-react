@@ -2,16 +2,21 @@
  *  Content app wide variables
  */
 
-$page-background-color: #ebebeb;
-$content-background-color: #ffff;
-$font-color: #333;
-$content-font-color: #666;
-$search-bar-color: #fff159;
-$search-btn-background-color: #ececec;
-$primary-btn-background-color: #3483fa;
-$gallery-controls-color: #aaaa;
-
-$content-container-width: 80%;
-
-$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ $content-background-color: #ffff;
+ $font-color: #333333;
+ $content-font-color: #666666;
+ $breadcrumb-font-color: #999999;
+ $search-bar-color: #ffe600;
+ $search-btn-background-color: #ececec;
+ $content-background-color: #eeeeee;
+ $primary-btn-background-color: #3483fa;
+ $gallery-controls-color: #aaaa;
+ 
+ $content-container-width: 80%;
+ 
+ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+   Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ 
+ :export {
+   primaryColor : $primary-btn-background-color;
+ }

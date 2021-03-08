@@ -13,10 +13,6 @@ const ProductPage = (props) => {
     getProduct(id)
   }, [location])
 
-  // useEffect(() => {
-  //   getProduct(props.selectedProduct.id)
-  // }, [props.selectedProduct])
-
   const getProduct = (productId) => {
     if (!productId) {
       return

@@ -1,7 +1,6 @@
 import React from 'react'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ProductListItem from '../ProductListItem/ProductListItem'
-import { ProgressSpinner } from 'primereact/progressspinner'
 
 import { Card } from 'primereact/card'
 import { Divider } from 'primereact/divider'
@@ -18,22 +17,16 @@ const ProductList = (props) => {
       )
     })
 
-    const loadingSpinner = (
-      <div className="p-grid p-justify-center">
-        <ProgressSpinner />
-      </div>
-    )
-
     return (
       <ErrorBoundary>
         <div
-          className={['p-grid', 'p-justify-around', classes.ProductList].join(
-            ' ',
-          )}
+          className={['p-grid', 'p-nogutter', classes.ProductList].join(' ')}
         >
-          <Card className="p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
-            {props.products.length > 0 ? productList : loadingSpinner}
-          </Card>
+          {props.products.length > 0 ? (
+            <Card className="p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
+              {productList}
+            </Card>
+          ) : null}
         </div>
       </ErrorBoundary>
     )
@@ -41,4 +34,5 @@ const ProductList = (props) => {
   return render()
 }
 
-export default React.memo(ProductList)
+// export default React.memo(ProductList)
+export default ProductList

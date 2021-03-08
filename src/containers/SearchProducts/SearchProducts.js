@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import WithClass from '../../hoc/WithClass'
 
 import { ItemsRequestService } from '../../services/ItemsRequestService'
@@ -9,10 +9,18 @@ import classes from './SearchProducts.module.scss'
 
 const SearchProducts = (props) => {
   const itemsRequestService = new ItemsRequestService()
-  const history = useHistory()
+  let location = useLocation()
+  let history = useHistory()
 
   const [selectedSuggestion, setSelectedSuggestion] = useState(null)
   const [suggestions, setSuggestions] = useState(null)
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    if (params.get('search')) {
+      setSelectedSuggestion(params.get('search'))
+    }
+  }, [location.search])
 
   /**
    * Search product name suggestions
@@ -46,6 +54,7 @@ const SearchProducts = (props) => {
    */
   const goToHomeHandler = () => {
     history.push('/items')
+    history.go()
   }
 
   /**
@@ -63,15 +72,17 @@ const SearchProducts = (props) => {
       params.append('search', query.q)
     }
 
-    props.changeSearchQuery(params.toString())
-    // history.push("/items", { search: params.toString() });
-    history.push(`/items?${params.toString()}`)
+    history.push({
+      pathname: '/items',
+      search: `?${params.toString()}`,
+      state: `?${params.toString()}`,
+    })
+    props.changeSearchQuery(params)
   }
 
   return (
     <WithClass className={classes.SearchProducts}>
       <div className="p-grid p-justify-around">
-        {/* <div className="p-sm-0 p-md-2 p-lg-2"></div> */}
         <SearchBar
           suggestions={suggestions}
           selectedSuggestion={selectedSuggestion}
@@ -80,7 +91,6 @@ const SearchProducts = (props) => {
           searchProducts={searchProductsHandler.bind(this)}
           setSelectedSuggestion={setSelectedSuggestion}
         />
-        {/* <div className="p-sm-0 p-md-2 p-lg-2"></div> */}
       </div>
     </WithClass>
   )

@@ -3,8 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  BrowserRouter,
-  Redirect,
+  BrowserRouter
 } from 'react-router-dom'
 
 import SearchProducts from '../SearchProducts/SearchProducts'
@@ -16,42 +15,48 @@ const App = () => {
   const [selectedProduct, setSelectedProductHandler] = useState(null)
   const [searchQuery, setSearchQuery] = useState(null)
 
-  const changeSearchQueryHandler = (query) => {
-    setSearchQuery(query)
+  const changeSearchQueryHandler = (params) => {
+    if (!params) {
+      return
+    }
+    setSearchQuery(params.get('search'))
   }
 
   return (
     <BrowserRouter>
-      <main>
-        <header>
-          <SearchProducts
-            changeSearchQuery={changeSearchQueryHandler.bind(this)}
-          />
-        </header>
+      <main className="main-content" role="main">
         <Router>
+          <header>
+            <SearchProducts
+              changeSearchQuery={changeSearchQueryHandler.bind(this)}
+            />
+          </header>
+          {/* <Route exact path="/">
+            <Redirect to="/items" />
+          </Route> */}
           <Switch>
-            <Route exact path="/">
-              <Redirect to="/items" />
-            </Route>
-            <Route path="/items">
-              <Switch>
-                <Route exact path="/items">
-                  <ProductListPage
-                    searchQuery={searchQuery}
-                    productsList={productsList}
-                    setProductsList={setProductsListHandler}
-                    setSelectedProduct={setSelectedProductHandler}
-                  />
-                </Route>
-                <Route path="/items/:id">
-                  <ProductPage
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProductHandler}
-                  />
-                </Route>
-              </Switch>
-            </Route>
-            <Route path="*">
+            <Route
+              exact
+              path="/items"
+              render={() => (
+                <ProductListPage
+                  searchQuery={searchQuery}
+                  productsList={productsList}
+                  setProductsList={setProductsListHandler}
+                  setSelectedProduct={setSelectedProductHandler}
+                />
+              )}
+            />
+            <Route
+              path="/items/:id"
+              render={() => (
+                <ProductPage
+                  selectedProduct={selectedProduct}
+                  setSelectedProduct={setSelectedProductHandler}
+                />
+              )}
+            />
+            <Route>
               <h1 style={{ textAlign: 'center' }}>
                 Error 404 - Page not founded
               </h1>
@@ -63,4 +68,4 @@ const App = () => {
   )
 }
 
-export default App
+export default React.memo(App)

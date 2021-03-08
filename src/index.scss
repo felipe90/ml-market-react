@@ -1,9 +1,11 @@
+@import '/src/variables.scss';
+
 // Global Styles
 body {
   font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  color: #333;
-  background-color: #ebebeb;
+  color: $font-color;
+  background-color: $content-background-color;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -17,34 +19,15 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 8px 0;
+  margin: 0.5rem 0;
 }
 
 p {
   margin: 0;
 }
 
-.content {
-  display: flex;
-  margin: 82px auto 32px;
-  padding: 0 16px;
-  max-width: 960px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.loading-icon {
-  display: block;
-  text-align: center;
-
-  .pi {
-    font-size: 3rem;
-    margin: 2rem auto;
-  }
+.main-content {
+  margin-top: 6rem;
 }
 
 // Custom Scroll bar

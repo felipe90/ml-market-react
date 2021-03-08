@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 
 import { ItemsRequestService } from '../services/ItemsRequestService'
 import ProductList from '../components/ProductList/ProductList'
@@ -9,8 +9,11 @@ const ProductListPage = (props) => {
   let location = useLocation()
 
   useEffect(() => {
+    if (!location.search || location.state === location.search) {
+      return
+    }
     getProductList(new URLSearchParams(location.search).get('search'))
-  }, [location])
+  }, [location.search])
 
   useEffect(() => {
     getProductList(props.searchQuery)
@@ -21,9 +24,6 @@ const ProductListPage = (props) => {
       return
     }
 
-    //reset product list items 
-    props.setProductsList([]);
-    
     itemsRequestService
       .getProductList({ q: query })
       .then((res) => {
@@ -36,4 +36,4 @@ const ProductListPage = (props) => {
 
   return <ProductList products={props.productsList}></ProductList>
 }
-export default ProductListPage
+export default React.memo(ProductListPage)
