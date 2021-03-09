@@ -5,6 +5,8 @@ import classes from './ProductListItem.module.scss'
 
 import { FREE_SHIPPING_SRC } from '../../assets/constants/app.constants'
 
+import { currencyFormat } from '../../misc'
+
 const ProductListItem = (props) => {
   const render = () => {
     const shippingImg = props.data.free_shipping ? (
@@ -23,21 +25,23 @@ const ProductListItem = (props) => {
     ) : null
 
     return (
-      <WithClass className={classes.ProductListItem}>
+      <WithClass className={['p-py-3', classes.ProductListItem].join(' ')}>
         <Link to={`/items/${props.data.id}`} className={classes.ItemImage}>
-          <img src={props.data.pictures[0]} alt={props.data.title} />
+          <img
+            className="p-px-3"
+            src={props.data.pictures[0]}
+            alt={props.data.title}
+          />
         </Link>
-        <WithClass className={classes.ItemProperties}>
+        <WithClass
+          className={['p-py-4', 'p-py-3', classes.ItemProperties].join(' ')}
+        >
           <WithClass className={classes.ItemPrice}>
-            <h3>
-              {props.data.price?.amount}
-              {/*TODO | currency: product.price.currency:"symbol-narrow":"4.0" */}
-            </h3>
+            <h3>{currencyFormat(props.data.price?.amount, ',')}</h3>
             {shippingImg}
-            <h2>{props.data.title}</h2>
-            <p>{props.data.title}</p>
-            {condition}
           </WithClass>
+          <h2>{props.data.title}</h2>
+          {condition}
         </WithClass>
         <section className={classes.ItemLocation}>
           <h3>

@@ -3,12 +3,14 @@
 .ProductListItem {
   margin: 0 auto;
   display: flex;
-  padding: 1rem;
 }
 
 .ItemProperties {
-  margin: 1.5rem 1rem;
   width: 60%;
+
+  p {
+    font-size: 1.125rem;
+  }
 }
 
 .ItemImage {
@@ -36,4 +38,5 @@
 .ItemLocation {
   width: 30%;
   padding: 2rem 0;
+  font-size: 0.75rem;
 }

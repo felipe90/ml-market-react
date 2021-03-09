@@ -2,7 +2,6 @@ import React from 'react'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ProductListItem from '../ProductListItem/ProductListItem'
 
-import { Card } from 'primereact/card'
 import { Divider } from 'primereact/divider'
 import classes from './ProductList.module.scss'
 
@@ -12,7 +11,9 @@ const ProductList = (props) => {
       return (
         <div key={product.id}>
           <ProductListItem data={product} />
-          {index !== props.products.length - 1 ? <Divider /> : null}
+          {index !== props.products.length - 1 ? (
+            <Divider className="p-p-0 p-m-0" />
+          ) : null}
         </div>
       )
     })
@@ -23,9 +24,21 @@ const ProductList = (props) => {
           className={['p-grid', 'p-nogutter', classes.ProductList].join(' ')}
         >
           {props.products.length > 0 ? (
-            <Card className="p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
+            <div
+              className={[
+                'p-shadow-3',
+                'p-sm-12',
+                'p-md-8',
+                'p-lg-8',
+                'p-sm-offset-0',
+                'p-md-offset-2',
+                'p-lg-offset-2',
+                'p-p-0',
+                classes.ProductListContainer,
+              ].join(' ')}
+            >
               {productList}
-            </Card>
+            </div>
           ) : null}
         </div>
       </ErrorBoundary>
@@ -34,5 +47,4 @@ const ProductList = (props) => {
   return render()
 }
 
-// export default React.memo(ProductList)
-export default ProductList
+export default React.memo(ProductList)

@@ -1,12 +1,26 @@
 @import '/src/variables.scss';
 
+/**
+ * index.scss
+ * Entry point off app styles
+ */
+
+// Global Fonts
+@font-face {
+  font-family: 'Proxima Nova';
+  src: local('Proxima Nova'),
+    url('./assets/fonts/ProximaNova-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // Global Styles
 body {
-  font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  color: $font-color;
   background-color: $content-background-color;
   box-sizing: border-box;
+  color: $font-color;
+  font-family: $font-family;
+  font-size: 16px;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -19,7 +33,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0.5rem 0;
+  margin: 0;
 }
 
 p {
