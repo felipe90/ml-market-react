@@ -1,9 +1,26 @@
-import { divide } from "lodash";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
+
+import classes from './ProductDetail.module.scss'
+import WithCard from '../../hoc/WithCard'
 
 const ProductDetail = (props) => {
+  const render = () => {
+    return (
+      <ErrorBoundary>
+        <div
+          className={['p-grid', 'p-nogutter', classes.ProductDetail].join(' ')}
+        >
+          <WithCard className={classes.ProductDetailContainer}>
+            <div className="p-p-3">
+              <div>{props.product?.id}</div>
+            </div>
+          </WithCard>
+        </div>
+      </ErrorBoundary>
+    )
+  }
+  return render()
+}
 
-  return <div>{props.product?.id}</div>;
-};
-
-export default ProductDetail;
+export default ProductDetail

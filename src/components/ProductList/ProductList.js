@@ -3,7 +3,9 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ProductListItem from '../ProductListItem/ProductListItem'
 
 import { Divider } from 'primereact/divider'
+
 import classes from './ProductList.module.scss'
+import WithCard from '../../hoc/WithCard'
 
 const ProductList = (props) => {
   const render = () => {
@@ -24,21 +26,9 @@ const ProductList = (props) => {
           className={['p-grid', 'p-nogutter', classes.ProductList].join(' ')}
         >
           {props.products.length > 0 ? (
-            <div
-              className={[
-                'p-shadow-3',
-                'p-sm-12',
-                'p-md-8',
-                'p-lg-8',
-                'p-sm-offset-0',
-                'p-md-offset-2',
-                'p-lg-offset-2',
-                'p-p-0',
-                classes.ProductListContainer,
-              ].join(' ')}
-            >
+            <WithCard className={classes.ProductListContainer}>
               {productList}
-            </div>
+            </WithCard>
           ) : null}
         </div>
       </ErrorBoundary>

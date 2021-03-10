@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { ItemsRequestService } from '../services/ItemsRequestService'
 import ProductList from '../components/ProductList/ProductList'
 
-const ProductListPage = (props) => {
+const ProductListPage = ({
+  productsList,
+  searchQuery,
+  setProductsList,
+  setCategories,
+}) => {
   const itemsRequestService = new ItemsRequestService()
   let location = useLocation()
 
@@ -16,8 +21,8 @@ const ProductListPage = (props) => {
   }, [location.search])
 
   useEffect(() => {
-    getProductList(props.searchQuery)
-  }, [props.searchQuery])
+    getProductList(searchQuery)
+  }, [searchQuery])
 
   const getProductList = (query) => {
     if (!query) {
@@ -27,13 +32,14 @@ const ProductListPage = (props) => {
     itemsRequestService
       .getProductList({ q: query })
       .then((res) => {
-        props.setProductsList(res.data.items)
+        setProductsList(res.data.items)
+        setCategories(res.data.relatedCategories)
       })
       .catch((e) => {
         console.log(e)
       })
   }
 
-  return <ProductList products={props.productsList}></ProductList>
+  return <ProductList products={productsList}></ProductList>
 }
 export default React.memo(ProductListPage)
