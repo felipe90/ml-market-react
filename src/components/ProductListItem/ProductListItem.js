@@ -36,11 +36,13 @@ const ProductListItem = (props) => {
         <WithClass
           className={['p-py-4', 'p-py-3', classes.ItemProperties].join(' ')}
         >
-          <WithClass className={classes.ItemPrice}>
+          <WithClass className={['p-pb-5', classes.ItemPrice].join(' ')}>
             <h3>{currencyFormat(props.data.price?.amount, ',')}</h3>
             {shippingImg}
           </WithClass>
-          <h2>{props.data.title}</h2>
+          <Link to={`/items/${props.data.id}`}>
+            <h2>{props.data.title}</h2>
+          </Link>
           {condition}
         </WithClass>
         <section className={classes.ItemLocation}>
