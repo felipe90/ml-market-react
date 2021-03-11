@@ -37,7 +37,7 @@ const ProductListItem = ({data}) => {
           className={['p-py-4', classes.ItemProperties].join(' ')}
         >
           <WithClass className={['p-pb-5', classes.ItemPrice].join(' ')}>
-            <h3>{currencyFormat(data.price?.amount, ',')}</h3>
+            <h3>{`$ ${currencyFormat(data.price?.amount, ',')}`}</h3>
             {shippingImg}
           </WithClass>
           <Link to={`/items/${data.id}`}>

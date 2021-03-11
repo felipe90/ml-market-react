@@ -1,5 +1,5 @@
 export const currencyFormat = (number, separator) => {
-  return '$' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator)
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator)
 }
 
 export const formatDecimalPart = (decimalPart) => {
