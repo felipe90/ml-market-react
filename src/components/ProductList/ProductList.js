@@ -7,13 +7,13 @@ import { Divider } from 'primereact/divider'
 import classes from './ProductList.module.scss'
 import WithCard from '../../hoc/WithCard'
 
-const ProductList = (props) => {
+const ProductList = ({ products }) => {
   const render = () => {
-    const productList = props.products.map((product, index) => {
+    const productList = products.map((product, index) => {
       return (
         <div key={product.id}>
           <ProductListItem data={product} />
-          {index !== props.products.length - 1 ? (
+          {index !== products.length - 1 ? (
             <Divider className="p-p-0 p-m-0" />
           ) : null}
         </div>
@@ -25,7 +25,7 @@ const ProductList = (props) => {
         <div
           className={['p-grid', 'p-nogutter', classes.ProductList].join(' ')}
         >
-          {props.products.length > 0 ? (
+          {products.length > 0 ? (
             <WithCard className={classes.ProductListContainer}>
               {productList}
             </WithCard>

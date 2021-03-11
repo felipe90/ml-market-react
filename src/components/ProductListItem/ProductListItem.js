@@ -7,47 +7,47 @@ import { FREE_SHIPPING_SRC } from '../../assets/constants/app.constants'
 
 import { currencyFormat } from '../../misc'
 
-const ProductListItem = (props) => {
+const ProductListItem = ({data}) => {
   const render = () => {
-    const shippingImg = props.data.free_shipping ? (
+    const shippingImg = data.free_shipping ? (
       <img
         src={FREE_SHIPPING_SRC}
         aria-label="free-shipping"
-        alt={props.data.title}
+        alt={data.title}
       />
     ) : null
 
-    const condition = props.data.condition ? (
+    const condition = data.condition ? (
       <p>
-        {props.data.condition === 'new' ? 'Nuevo' : null}
-        {props.data.condition === 'used' ? 'Usado' : null}
+        {data.condition === 'new' ? 'Nuevo' : null}
+        {data.condition === 'used' ? 'Usado' : null}
       </p>
     ) : null
 
     return (
-      <WithClass className={['p-py-3', classes.ProductListItem].join(' ')}>
-        <Link to={`/items/${props.data.id}`} className={classes.ItemImage}>
+      <WithClass className={['p-d-flex','p-jc-between','p-py-3', classes.ProductListItem].join(' ')}>
+        <Link to={`/items/${data.id}`} className={classes.ItemImage}>
           <img
             className="p-px-3"
-            src={props.data.pictures[0]}
-            alt={props.data.title}
+            src={data.pictures[0]}
+            alt={data.title}
           />
         </Link>
         <WithClass
-          className={['p-py-4', 'p-py-3', classes.ItemProperties].join(' ')}
+          className={['p-py-4', classes.ItemProperties].join(' ')}
         >
           <WithClass className={['p-pb-5', classes.ItemPrice].join(' ')}>
-            <h3>{currencyFormat(props.data.price?.amount, ',')}</h3>
+            <h3>{currencyFormat(data.price?.amount, ',')}</h3>
             {shippingImg}
           </WithClass>
-          <Link to={`/items/${props.data.id}`}>
-            <h2>{props.data.title}</h2>
+          <Link to={`/items/${data.id}`}>
+            <h2>{data.title}</h2>
           </Link>
           {condition}
         </WithClass>
-        <section className={classes.ItemLocation}>
+        <section className={['p-px-3', 'p-pt-5', classes.ItemLocation].join(' ')}>
           <h3>
-            {props.data.address.city_name}, {props.data.address.state_name}
+            {data.address.city_name}, {data.address.state_name}
           </h3>
         </section>
       </WithClass>

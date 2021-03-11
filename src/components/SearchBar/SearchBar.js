@@ -11,24 +11,31 @@ import WithClass from '../../hoc/WithClass'
 
 import "./SearchBar.scss";
 
-const SearchBar = (props) => {
+const SearchBar = ({
+  suggestions,
+  searchProducts,
+  searchSuggestions,
+  selectedSuggestion,
+  goToHome,
+  setSelectedSuggestion
+}) => {
   return (
     <div className="SearchBar p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
       <img
         className="img-logo"
         alt={LOGO_ALT_LABEL}
         src={LOGO_SRC}
-        onClick={props.goToHome}
+        onClick={goToHome}
       />
       <WithClass className="p-inputgroup search-autocomplete">
         <AutoComplete
-          value={props.selectedSuggestion}
-          suggestions={props.suggestions}
-          completeMethod={props.searchSuggestions}
+          value={selectedSuggestion}
+          suggestions={suggestions}
+          completeMethod={searchSuggestions}
           field="q"
-          onChange={(e) => props.setSelectedSuggestion(e.value)}
-          onKeyUp={props.searchProducts}
-          onSelect={props.searchProducts}
+          onChange={(e) => setSelectedSuggestion(e.value)}
+          onKeyUp={searchProducts}
+          onSelect={searchProducts}
           placeholder={SEARCH_PLACEHOLDER}
           ariaLabel="search suggestion input"
           inputId="search-input"
@@ -38,7 +45,7 @@ const SearchBar = (props) => {
           type="button"
           icon="pi pi-search"
           className="search-button"
-          onClick={props.searchProducts}
+          onClick={searchProducts}
         ></Button>
       </WithClass>
     </div>

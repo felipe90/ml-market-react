@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   BrowserRouter,
+  Redirect,
 } from 'react-router-dom'
 
 import SearchProducts from '../SearchProducts/SearchProducts'
@@ -34,10 +35,13 @@ const App = () => {
               changeSearchQuery={changeSearchQueryHandler.bind(this)}
             />
           </header>
-          <CategoriesBreadcrumb categories={categories}></CategoriesBreadcrumb>
-          {/* <Route exact path="/">
+          <CategoriesBreadcrumb
+            categories={categories}
+            maxNumCategories={3}
+          ></CategoriesBreadcrumb>
+          <Route exact path="/">
             <Redirect to="/items" />
-          </Route> */}
+          </Route>
           <Switch>
             <Route
               exact
@@ -46,7 +50,6 @@ const App = () => {
                 <ProductListPage
                   searchQuery={searchQuery}
                   productsList={productsList}
-                  categories={categories}
                   setProductsList={setProductsListHandler}
                   setCategories={setCategoriesHandler}
                   setSelectedProduct={setSelectedProductHandler}
@@ -57,7 +60,9 @@ const App = () => {
               path="/items/:id"
               render={() => (
                 <ProductPage
+                  categories={categories}
                   selectedProduct={selectedProduct}
+                  setCategories={setCategoriesHandler}
                   setSelectedProduct={setSelectedProductHandler}
                 />
               )}

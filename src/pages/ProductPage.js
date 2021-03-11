@@ -4,7 +4,11 @@ import { useLocation, useParams } from 'react-router-dom'
 import ProductDetail from '../components/ProductDetail/ProductDetail'
 import { ItemsRequestService } from '../services/ItemsRequestService'
 
-const ProductPage = (props) => {
+const ProductPage = ({
+  selectedProduct,
+  setCategories,
+  setSelectedProduct,
+}) => {
   const itemsRequestService = new ItemsRequestService()
   let location = useLocation()
   let { id } = useParams()
@@ -20,13 +24,14 @@ const ProductPage = (props) => {
     itemsRequestService
       .getProduct(productId)
       .then((res) => {
-        props.setSelectedProduct(res.data)
+        setSelectedProduct(res.data)
+        setCategories(res.data.categories)
       })
       .catch((e) => {
         console.log(e)
       })
   }
 
-  return <ProductDetail product={props.selectedProduct}></ProductDetail>
+  return <ProductDetail product={selectedProduct}></ProductDetail>
 }
 export default ProductPage

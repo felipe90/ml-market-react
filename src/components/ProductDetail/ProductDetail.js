@@ -4,7 +4,7 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import classes from './ProductDetail.module.scss'
 import WithCard from '../../hoc/WithCard'
 
-const ProductDetail = (props) => {
+const ProductDetail = ({ product }) => {
   const render = () => {
     return (
       <ErrorBoundary>
@@ -13,7 +13,7 @@ const ProductDetail = (props) => {
         >
           <WithCard className={classes.ProductDetailContainer}>
             <div className="p-p-3">
-              <div>{props.product?.id}</div>
+              <div>{product?.id}</div>
             </div>
           </WithCard>
         </div>

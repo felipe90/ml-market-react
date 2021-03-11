@@ -7,7 +7,7 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 
 import classes from './SearchProducts.module.scss'
 
-const SearchProducts = (props) => {
+const SearchProducts = ({ changeSearchQuery }) => {
   const itemsRequestService = new ItemsRequestService()
   let location = useLocation()
   let history = useHistory()
@@ -71,13 +71,14 @@ const SearchProducts = (props) => {
     if (typeof query === 'object') {
       params.append('search', query.q)
     }
-
+  
+    // Upload search query and state 
+    changeSearchQuery(params)
     history.push({
       pathname: '/items',
       search: `?${params.toString()}`,
       state: `?${params.toString()}`,
     })
-    props.changeSearchQuery(params)
   }
 
   return (
