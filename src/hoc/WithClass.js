@@ -1,7 +1,7 @@
 import React from 'react'
 
 const WithClass = (props) => {
-  return <div className={props.className}>{props.children}</div>
+  return <section className={props.className}>{props.children}</section>
 }
 
 export default WithClass;

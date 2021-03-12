@@ -14,10 +14,10 @@ import ProductListPage from '../../pages/ProductListPage'
 import ProductPage from '../../pages/ProductPage'
 
 const App = () => {
-  const [productsList, setProductsListHandler] = useState([])
-  const [categories, setCategoriesHandler] = useState([])
-  const [selectedProduct, setSelectedProductHandler] = useState(null)
   const [searchQuery, setSearchQuery] = useState(null)
+  const [categories, setCategoriesHandler] = useState([])
+  const [productsList, setProductsListHandler] = useState([])
+  const [selectedProduct, setSelectedProductHandler] = useState({})
 
   const changeSearchQueryHandler = (params) => {
     if (!params) {
