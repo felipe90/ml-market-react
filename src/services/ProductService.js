@@ -1,13 +1,10 @@
-import config from '../assets/config/config.json'
-
-const API_URL = `${config.host}:${config.port}${config.api}`
 export class ProductService {
   /**
    * Get categories and parse them to work as navigation link
    * @param {number} number
    * @param {string} currency
    * @param {separator} separator
-   * @returns {Object}
+   * @returns {string}
    */
   currencyFormat = (number = '', currency = null, separator = ',') => {
     return `${currency}$ ${number
@@ -18,7 +15,7 @@ export class ProductService {
   /**
    * Get categories and parse them to work as navigation link
    * @param {Array} categories
-   * @returns {Object}
+   * @returns {Array}
    */
   getRelatedCategories(categories = []) {
     if (!categories) return
@@ -36,10 +33,10 @@ export class ProductService {
    * Get categories and parse them to work as navigation link
    * @param {Array} pictures
    * @param {Object} product
-   * @returns {Array} images
+   * @returns {Array}
    */
   fromProductDataToImagesArray(product = {}) {
-    if (!product.pictures) return [];
+    if (!product.pictures) return []
 
     return product.pictures.map((img, index) => {
       return {

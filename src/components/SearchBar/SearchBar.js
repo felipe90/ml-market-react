@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react'
 
-import { AutoComplete } from "primereact/autocomplete";
-import { Button } from "primereact/button";
+import { AutoComplete } from 'primereact/autocomplete'
+import { Button } from 'primereact/button'
 import {
   SEARCH_PLACEHOLDER,
   LOGO_ALT_LABEL,
   LOGO_SRC,
-} from "../../assets/constants/app.constants";
+} from '../../assets/constants/app.constants'
 import WithClass from '../../hoc/WithClass'
 
-import "./SearchBar.scss";
+import './SearchBar.scss'
 
 const SearchBar = ({
   suggestions,
@@ -17,8 +17,10 @@ const SearchBar = ({
   searchSuggestions,
   selectedSuggestion,
   goToHome,
-  setSelectedSuggestion
+  setSelectedSuggestion,
 }) => {
+  const autocompleteRef = React.createRef()
+
   return (
     <div className="SearchBar p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
       <img
@@ -29,27 +31,37 @@ const SearchBar = ({
       />
       <WithClass className="p-inputgroup search-autocomplete">
         <AutoComplete
+          ref={autocompleteRef}
           value={selectedSuggestion}
           suggestions={suggestions}
           completeMethod={searchSuggestions}
           field="q"
-          onChange={(e) => setSelectedSuggestion(e.value)}
-          onKeyUp={searchProducts}
-          onSelect={searchProducts}
+          onChange={(e) => {
+            setSelectedSuggestion(e.value)
+          }}
+          onKeyUp={(e) => {
+            searchProducts(e, e.value)
+          }}
+          onSelect={(e) => {
+            searchProducts(e, e.value.q)
+          }}
           placeholder={SEARCH_PLACEHOLDER}
           ariaLabel="search suggestion input"
           inputId="search-input"
           minLength={2}
+          autoFocus
         />
         <Button
           type="button"
           icon="pi pi-search"
           className="search-button"
-          onClick={searchProducts}
+          onClick={(e) => {
+            searchProducts(e, selectedSuggestion)
+          }}
         ></Button>
       </WithClass>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

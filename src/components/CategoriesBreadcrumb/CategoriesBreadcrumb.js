@@ -2,22 +2,28 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import classes from './CategoriesBreadcrumb.module.scss'
+import { ProductService } from '../../services/ProductService'
 
 const CategoriesBreadcrumb = ({ categories, maxNumCategories }) => {
   let items = []
+  const productService = new ProductService();
 
   const render = () => {
     if (categories) {
-      items = categories.slice(0, maxNumCategories).map((category, index) => {
+
+
+      items =  productService.getRelatedCategories(categories).slice(0, maxNumCategories).map((category, index) => {
         return (
           <li key={index}>
             <Link
-              to={`/items?search=${category}`}
+              // to={`/items?search=${category}`}
+              to={category.url}
               style={{
                 fontWeight: index !== maxNumCategories - 1 ? 'auto' : 'bold',
               }}
             >
-              {category}
+              {/* {category} */}
+              {category.label}
             </Link>
             {index !== maxNumCategories - 1 ? (
               <i className="pi pi-chevron-right p-mx-2"></i>

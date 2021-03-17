@@ -3,12 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./containers/App/App";
 import reportWebVitals from "./reportWebVitals";
 
-import "primereact/resources/themes/mdc-light-indigo/theme.css";
+import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import 'primeflex/primeflex.css';
+
 import "./index.scss";
 import "./variables.scss";
-import 'primeflex/primeflex.css';
 
 ReactDOM.render(
   <React.StrictMode>

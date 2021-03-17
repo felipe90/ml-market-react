@@ -20,7 +20,7 @@ const SearchProducts = ({ changeSearchQuery }) => {
     if (params.get('search')) {
       setSelectedSuggestion(params.get('search'))
     }
-  }, [location.search])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Search product name suggestions
@@ -40,12 +40,28 @@ const SearchProducts = ({ changeSearchQuery }) => {
    * Search product event handler
    * @param {event} event
    */
-  const searchProductsHandler = (event) => {
+  const searchProductsHandler = (event = null, queryValue) => {
+    if (!event) {
+      return
+    }
+
+    // Handle search button and 'enter' key event action
     if (
       (event.type === 'keyup' && event.keyCode === 13) ||
       event.type === 'click'
     ) {
       _performSearch(selectedSuggestion)
+    }
+
+    // Handle autocomplete component original event action
+    if (event.originalEvent) {
+      if (
+        (event.originalEvent.type === 'keydown' &&
+          event.originalEvent.keyCode === 13) ||
+        event.originalEvent.type === 'click'
+      ) {
+        _performSearch(queryValue)
+      }
     }
   }
 
@@ -58,21 +74,16 @@ const SearchProducts = ({ changeSearchQuery }) => {
   }
 
   /**
-   * Perform a search of products based on the query value
-   * @param {string} query
+   * Perform a search of products based on 'selectedSuggestion' value
+   * @param {string} queryValue
    */
-  const _performSearch = (query) => {
-    if (!query) return
-    const params = new URLSearchParams()
+  const _performSearch = (queryValue) => {
+    if (!queryValue) return
 
-    if (typeof query === 'string') {
-      params.append('search', query)
-    }
-    if (typeof query === 'object') {
-      params.append('search', query.q)
-    }
-  
-    // Upload search query and state 
+    const params = new URLSearchParams()
+    params.append('search', queryValue)
+
+    // Update search query and state
     changeSearchQuery(params)
     history.push({
       pathname: '/items',
