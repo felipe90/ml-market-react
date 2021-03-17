@@ -114,7 +114,7 @@ const ProductDetail = ({ product }) => {
                 />
               </aside>
 
-              <section className="p-grid p-pb-5">
+              <section className="p-grid">
                 <WithClass className={['p-col-12', classes.ItemDesc].join(' ')}>
                   <h2 className="p-pb-5">Descripcion del producto</h2>
                   <p>{product.description}</p>
