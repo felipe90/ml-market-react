@@ -23,7 +23,7 @@ const ProductList = ({ products }) => {
     return (
       <ErrorBoundary>
         <div
-          className={['p-grid', 'p-nogutter', classes.ProductList].join(' ')}
+          className="p-grid p-nogutter"
         >
           {products.length > 0 ? (
             <WithCard className={classes.ProductListContainer}>

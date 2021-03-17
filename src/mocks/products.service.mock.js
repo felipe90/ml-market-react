@@ -1,6 +1,5 @@
 
-export function getProductServiceMock() {
-  return {
+const productServiceMock = {
     // TODO
     // getProductListByTitle: jasmine.createSpy('getProductListByTitle').and.returnValue(of(itemsMocks)),
     // getProductById: jasmine.createSpy('getProductById').and.returnValue(of(itemMocks)),
@@ -10,3 +9,5 @@ export function getProductServiceMock() {
     // fromPicturesRawArrayToImages: jasmine.createSpy('fromPicturesRawArrayToImages'),
   };
 }
+
+export default productServiceMock;

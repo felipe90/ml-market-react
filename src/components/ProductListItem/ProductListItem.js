@@ -5,9 +5,11 @@ import classes from './ProductListItem.module.scss'
 
 import { FREE_SHIPPING_SRC } from '../../assets/constants/app.constants'
 
-import { currencyFormat } from '../../misc'
+import { ProductService } from '../../services/ProductService'
 
 const ProductListItem = ({ product }) => {
+  const productService = new ProductService();
+
   const render = () => {
     const shippingImg = product.free_shipping ? (
       <img
@@ -38,7 +40,7 @@ const ProductListItem = ({ product }) => {
         </Link>
         <WithClass className={['p-py-4', classes.ItemProperties].join(' ')}>
           <WithClass className={['p-pb-5', classes.ItemPrice].join(' ')}>
-            <h3>{`${currencyFormat(
+            <h3>{`${productService.currencyFormat(
               product.price?.amount,
               product.price?.currency,
               ',',

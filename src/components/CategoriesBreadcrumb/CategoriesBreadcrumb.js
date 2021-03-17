@@ -11,7 +11,14 @@ const CategoriesBreadcrumb = ({ categories, maxNumCategories }) => {
       items = categories.slice(0, maxNumCategories).map((category, index) => {
         return (
           <li key={index}>
-            <Link to={`/items?search=${category}`}>{category}</Link>
+            <Link
+              to={`/items?search=${category}`}
+              style={{
+                fontWeight: index !== maxNumCategories - 1 ? 'auto' : 'bold',
+              }}
+            >
+              {category}
+            </Link>
             {index !== maxNumCategories - 1 ? (
               <i className="pi pi-chevron-right p-mx-2"></i>
             ) : null}

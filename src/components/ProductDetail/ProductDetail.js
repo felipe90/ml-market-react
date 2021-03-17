@@ -1,42 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import { Button } from 'primereact/button'
-import { Galleria } from 'primereact/galleria';
+import { Galleria } from 'primereact/galleria'
 
 import classes from './ProductDetail.module.scss'
 import WithCard from '../../hoc/WithCard'
 import WithClass from '../../hoc/WithClass'
 
 import { FREE_SHIPPING_SRC } from '../../assets/constants/app.constants'
-import { currencyFormat } from '../../misc'
+import { ProductService } from '../../services/ProductService'
 
 const ProductDetail = ({ product }) => {
-
-  
-  const itemTemplate = (item) => {
-    // custom item content
-  }
+  const productService = new ProductService()
 
   const responsiveOptions = [
     {
-        breakpoint: '1024px',
-        numVisible: 5
+      breakpoint: '1024px',
+      numVisible: 5,
     },
     {
-        breakpoint: '768px',
-        numVisible: 3
+      breakpoint: '768px',
+      numVisible: 3,
     },
     {
-        breakpoint: '560px',
-        numVisible: 1
-    }
-  ];
+      breakpoint: '560px',
+      numVisible: 1,
+    },
+  ]
+
+  const galleryStyles = {
+    maxWidth: '680px',
+    maxHeight: '680px',
+    minWidth: '680px',
+    width: '680px',
+  }
+
+  const itemTemplate = function (item) {
+    return (
+      <img
+        src={item.itemImageSrc}
+        alt={item.alt}
+        style={{ width: '100%', display: 'block' }}
+      />
+    )
+  }
 
   const render = () => {
+    const images = productService.fromProductDataToImagesArray(product)
+
     let condition = ''
-    const images = this.productService.fromPicturesRawArrayToImages(res.pictures, res);
-    
-    console.log(product)
     if (product.condition && product.sold_quantity) {
       if (product.condition === 'new') {
         condition = `Nuevo - ${product.sold_quantity} vendidos`
@@ -54,49 +66,68 @@ const ProductDetail = ({ product }) => {
       />
     ) : null
 
+    const attributes = product.free_shipping
+      ? product.attributes.map((attr, index) => <p key={index}>{attr}</p>)
+      : null
+
     return (
       <ErrorBoundary>
         {Object.keys(product).length > 0 && (
-          <div
-            className={['p-grid', 'p-nogutter', classes.ProductDetail].join(
-              ' ',
-            )}
+          <WithCard
+            className={['p-p-5', classes.ProductDetailContainer].join(' ')}
           >
-            <WithCard
-              className={['p-p-3', classes.ProductDetailContainer].join(' ')}
-            >
-              <WithClass className="ItemImage">
+            <section className="p-grid">
+              <WithClass
+                className={[
+                  'p-md-fixed p-lg-fixed p-mb-5',
+                  classes.ItemImage,
+                ].join(' ')}
+              >
                 <Galleria
-                  value={[]}
+                  value={images}
                   responsiveOptions={responsiveOptions}
+                  numVisible={4}
                   showThumbnails={false}
-                  numVisible={5}
-                  circular={true}
-                  showItemNavigators={true}
-                ></Galleria>
+                  circular
+                  showItemNavigators
+                  style={galleryStyles}
+                  item={itemTemplate}
+                />
               </WithClass>
-              <WithClass className="ItemProps">
-                <div>{product?.id}</div>
-                {condition}
-              </WithClass>
-              <WithClass className="ItemPrice">
-                <h3>{`${currencyFormat(
-                  product.price?.amount,
-                  product.price?.currency,
-                  ',',
-                )}`}</h3>
-                {shippingImg}
-              </WithClass>
-              <WithClass className="ItemAttributes">
-                <h2>Caracteristicas</h2>
-              </WithClass>
-              <Button label="Comprar" className="p-button-raised" />
-              <WithClass className="ItemDesc">
-                <h2>Descripcion del producto</h2>
-                <p>{product.description}</p>
-              </WithClass>
-            </WithCard>
-          </div>
+              <aside className="p-col p-pb-sm-5 p-px-sm-0 p-px-md-3 p-px-lg-3">
+                <WithClass className={[classes.ItemProps].join(' ')}>
+                  <p className="p-pb-3">{condition}</p>
+                  <h1 className="p-pb-5">{product?.title}</h1>
+                </WithClass>
+                <WithClass className={['p-pb-5', classes.ItemPrice].join(' ')}>
+                  <h3>{`${productService.currencyFormat(
+                    product.price?.amount,
+                    product.price?.currency,
+                    ',',
+                  )}`}</h3>
+                  {shippingImg}
+                </WithClass>
+                <Button
+                  label="Comprar"
+                  className="p-button-raised"
+                  style={{ width: '100%' }}
+                />
+              </aside>
+
+              <section className="p-grid p-pb-5">
+                <WithClass className={['p-col-12', classes.ItemDesc].join(' ')}>
+                  <h2 className="p-pb-5">Descripcion del producto</h2>
+                  <p>{product.description}</p>
+                </WithClass>
+                <WithClass
+                  className={['p-col-12', classes.ItemAttributes].join(' ')}
+                >
+                  <h2 className="p-pb-5">Caracteristicas</h2>
+                  <div className="d-flex flex-column p-mb-3">{attributes}</div>
+                </WithClass>
+              </section>
+            </section>
+          </WithCard>
         )}
       </ErrorBoundary>
     )

@@ -38,14 +38,14 @@ export class ProductService {
    * @param {Object} product
    * @returns {Array} images
    */
-  fromPicturesRawArrayToImages(pictures = [], product = null) {
-    if (!product) return
+  fromProductDataToImagesArray(product = {}) {
+    if (!product.pictures) return [];
 
-    return pictures.map((img, index) => {
+    return product.pictures.map((img, index) => {
       return {
         title: `${product.title}_${index}`,
+        itemImageSrc: img.secure_url,
         thumbnailImageSrc: img.secure_url,
-        previewImageSrc: img.secure_url,
         alt: `${product.title}_${index}`,
       }
     })
