@@ -23,7 +23,7 @@ const SearchProducts = ({ changeSearchQuery }) => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Search product name suggestions
+   * Search product name suggestions facade
    */
   const searchSuggestionsHandler = () => {
     itemsRequestService
@@ -81,7 +81,12 @@ const SearchProducts = ({ changeSearchQuery }) => {
     if (!queryValue) return
 
     const params = new URLSearchParams()
-    params.append('search', queryValue)
+    if (typeof queryValue === 'string') {
+      params.append('search', queryValue)
+    }
+    if (typeof queryValue === 'object') {
+      params.append('search', queryValue.q)
+    }
 
     // Update search query and state
     changeSearchQuery(params)
@@ -94,7 +99,7 @@ const SearchProducts = ({ changeSearchQuery }) => {
 
   return (
     <WithClass className={classes.SearchProducts}>
-      <div className="p-grid p-justify-around">
+      <div className="p-grid p-nogutter p-justify-around">
         <SearchBar
           suggestions={suggestions}
           selectedSuggestion={selectedSuggestion}

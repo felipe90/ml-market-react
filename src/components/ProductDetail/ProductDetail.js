@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import { Button } from 'primereact/button'
 import { Galleria } from 'primereact/galleria'
@@ -111,6 +111,9 @@ const ProductDetail = ({ product }) => {
                   label="Comprar"
                   className="p-button-raised"
                   style={{ width: '100%' }}
+                  onClick={() => {
+                    window.open(product.permalink, '_blank')
+                  }}
                 />
               </aside>
 

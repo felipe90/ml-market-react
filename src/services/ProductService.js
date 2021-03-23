@@ -31,7 +31,6 @@ export class ProductService {
 
   /**
    * Get categories and parse them to work as navigation link
-   * @param {Array} pictures
    * @param {Object} product
    * @returns {Array}
    */

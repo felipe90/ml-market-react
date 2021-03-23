@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 
 import ProductDetail from '../components/ProductDetail/ProductDetail'

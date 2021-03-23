@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { AutoComplete } from 'primereact/autocomplete'
 import { Button } from 'primereact/button'
 import {
@@ -19,7 +18,6 @@ const SearchBar = ({
   goToHome,
   setSelectedSuggestion,
 }) => {
-  const autocompleteRef = React.createRef()
 
   return (
     <div className="SearchBar p-sm-12 p-md-8 p-lg-8 p-sm-offset-0 p-md-offset-2 p-lg-offset-2">
@@ -31,7 +29,6 @@ const SearchBar = ({
       />
       <WithClass className="p-inputgroup search-autocomplete">
         <AutoComplete
-          ref={autocompleteRef}
           value={selectedSuggestion}
           suggestions={suggestions}
           completeMethod={searchSuggestions}
