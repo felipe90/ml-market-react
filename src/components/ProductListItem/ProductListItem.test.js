@@ -9,7 +9,7 @@ import itemsMock from '../../mocks/data/items.mock.json'
 
 configure({ adapter: new Adapter() })
 
-describe('<ProductDetail />', () => {
+describe('<ProductListItem />', () => {
   let wrapper = null
 
   beforeEach(() => {

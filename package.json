@@ -13,7 +13,7 @@
     "start:dev": "concurrently -k -n app,server \"npm run start:front\" \"npm run start:static\" ",
     "build:front": "react-scripts build",
     "test:watch": "npm test --watch",
-    "test:coverage": "npm test --coverage --watch=false"
+    "test:coverage": "npm test -- --coverage --watchAll=false"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -55,6 +55,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "coverageReporters": ["json", "html"]
   },
   "devDependencies": {
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
