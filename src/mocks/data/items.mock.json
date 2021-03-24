@@ -6,7 +6,7 @@
       "price": { "currency": "COP", "amount": "50000", "decimals": 0 },
       "permalink": "https://articulo.mercadolibre.com.co/MCO-466401100-audifonos-earpods-apple-iphone-5-5s-5c-6-ipad-ipod-original-_JM",
       "thumbnail": "http://mco-s1-p.mlstatic.com/937713-MCO31043068409_062019-I.jpg",
-      "free_shipping": false,
+      "free_shipping": true,
       "sold_quantity": 500,
       "condition": "new",
       "address": {

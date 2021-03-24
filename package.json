@@ -12,8 +12,8 @@
     "start:static": "node src/static/server.js",
     "start:dev": "concurrently -k -n app,server \"npm run start:front\" \"npm run start:static\" ",
     "build:front": "react-scripts build",
-    "test:watch": "npm test",
-    "test:coverage": "npm test --coverage --watchAll=false"
+    "test:watch": "npm test --watch",
+    "test:coverage": "npm test --coverage --watch=false"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -42,11 +42,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "jest": {
-    "coverageReporters": [
-      "text-summary"
     ]
   },
   "browserslist": {

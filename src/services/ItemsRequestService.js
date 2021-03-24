@@ -33,18 +33,4 @@ export class ItemsRequestService {
   getSuggestedQueries(query) {
     return axios.get(`${config.suggestedQueriesEndPoint}${query}`);
   }
-
-  /**
-   * Transform query params object to valid string
-   * @param {object} params
-   * @returns {string}
-   */
-  _getParams(params) {
-    const options = [];
-    Object.keys(params).forEach((keyName) => {
-      options.push(`${keyName}=${params[keyName]}`);
-    });
-
-    return options.join("&");
-  }
 }
