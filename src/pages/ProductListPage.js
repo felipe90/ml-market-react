@@ -10,6 +10,7 @@ const ProductListPage = ({
   searchQuery,
   setProductsList,
   setCategories,
+  setMetaTags
 }) => {
   const itemsRequestService = new ItemsRequestService()
   let location = useLocation()
@@ -35,6 +36,11 @@ const ProductListPage = ({
       .then((res) => {
         setProductsList(res.data.items)
         setCategories(res.data.relatedCategories)
+        setMetaTags({
+          title: `Ml-market - ${query}`,
+          description: `Ml-market - ${query}`,
+          keywords: res.data.relatedCategories.join(',') 
+        })
       })
       .catch((e) => {
         console.log(e)

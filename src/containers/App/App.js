@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import SearchProducts from '../SearchProducts/SearchProducts'
 import CategoriesBreadcrumb from '../../components/CategoriesBreadcrumb/CategoriesBreadcrumb'
@@ -17,6 +18,11 @@ const App = () => {
   const [categories, setCategoriesHandler] = useState([])
   const [productsList, setProductsListHandler] = useState([])
   const [selectedProduct, setSelectedProductHandler] = useState({})
+  const [metaTags, setMetaTagsHandler] = useState({
+    title: 'Ml-market - Nunca pares de buscar',
+    description: 'La comunidad de compra y venta online más grande de América Latina.',
+    keywords: 'Compra,Venta,Productos,ECommerce' 
+  })
 
   const changeSearchQueryHandler = (params) => {
     if (!params) {
@@ -27,6 +33,19 @@ const App = () => {
 
   return (
     <Router>
+      <Helmet>
+        <title>{metaTags.title}</title>
+        <meta name="keywords" content={metaTags.keywords} />
+        <meta
+          name="description"
+          content={metaTags.description}
+        />
+        <meta
+          property="og:description"
+          content={metaTags.description}
+        />
+        <meta property="og:title" content="Ml-market" />
+      </Helmet>
       <main className="main-content" role="main">
         <header>
           <SearchProducts
@@ -51,6 +70,7 @@ const App = () => {
                 setProductsList={setProductsListHandler}
                 setCategories={setCategoriesHandler}
                 setSelectedProduct={setSelectedProductHandler}
+                setMetaTags={setMetaTagsHandler}
               />
             )}
           />
@@ -62,6 +82,7 @@ const App = () => {
                 selectedProduct={selectedProduct}
                 setCategories={setCategoriesHandler}
                 setSelectedProduct={setSelectedProductHandler}
+                setMetaTags={setMetaTagsHandler}
               />
             )}
           />
