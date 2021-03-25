@@ -1,39 +1,45 @@
-@import '/src/variables.scss';
+@import '/src/variables';
 
 .ProductListItem {
-  margin: 0 auto;
   display: flex;
+  margin: 0 auto;
 }
 
 .ItemProperties {
   width: 60%;
+
   h2 {
     font-size: 1.125rem;
   }
+
   p {
     font-size: 1.125rem;
   }
+
   a {
-    text-decoration: none;
     color: $font-color;
+    text-decoration: none;
   }
 }
 
 .ItemImage {
   text-align: center;
+
   img {
-    width: 180px;
     height: 180px;
+    width: 180px;
   }
 }
 
 .ItemPrice {
-  display: flex;
   align-items: center;
+  display: flex;
+
   h3 {
-    margin: 0;
     font-size: 1.75rem;
+    margin: 0;
   }
+
   img {
     margin: 0 0.5rem;
   }

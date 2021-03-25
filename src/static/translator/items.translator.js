@@ -1,6 +1,3 @@
-const _ = require("lodash");
-const ML_API = require("../constants/ml-api.constants");
-
 const fromItemRawToItemDTO = (input) => {
   if (!input) {
     return;

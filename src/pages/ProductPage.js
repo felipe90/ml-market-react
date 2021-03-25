@@ -41,4 +41,4 @@ const ProductPage = ({
 
   return <ProductDetail product={selectedProduct}></ProductDetail>
 }
-export default ProductPage
+export default React.memo(ProductPage)

@@ -3,18 +3,15 @@
  */
 
 $container-background-color: #ffff;
-$font-color: #333333;
-$content-font-color: #666666;
-$breadcrumb-font-color: #999999;
+$font-color: #333;
+$content-font-color: #666;
+$breadcrumb-font-color: #999;
 $search-bar-color: #ffe600;
 $search-btn-background-color: #ececec;
-$content-background-color: #eeeeee;
+$content-background-color: #eee;
 $primary-btn-background-color: #3483fa;
 $gallery-controls-color: #aaaa;
 
 $font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, Roboto,
   Helvetica, Arial, sans-serif;
 
-:export {
-  primaryColor: $primary-btn-background-color;
-}

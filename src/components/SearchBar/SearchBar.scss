@@ -1,44 +1,45 @@
-@import "/src/variables.scss";
+@import '/src/variables';
 
 .SearchBar {
-  margin: 0 auto;
+  align-items: center;
   display: flex;
   flex-flow: row;
-  align-items: center;
   justify-content: space-between;
+  margin: 0 auto;
   width: 100%;
 
   .img-logo {
     align-self: flex-start;
+    cursor: pointer;
     margin: auto 0;
     width: 3.75rem;
   }
+}
 
-  .search-autocomplete {
-    align-self: flex-end;
-    margin: 0 0 0 2rem;
-    flex-grow: 2;
+.SearchBar .search-autocomplete {
+  align-self: flex-end;
+  flex-grow: 2;
+  margin: 0 0 0 2rem;
 
-    .search-button {
-      background-color: $search-btn-background-color;
-      color: $font-color;
-      border: 1px $search-btn-background-color solid;
-    }
-
-    .p-autocomplete .p-inputtext {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      font-size: 1.125rem;
-    }
+  .search-button {
+    background-color: $search-btn-background-color;
+    border: 1px $search-btn-background-color solid;
+    color: $font-color;
   }
 
-  .search-autocomplete .search-button {
-    &:enabled:hover {
-      background-color: $primary-btn-background-color;
-    }
+  .p-autocomplete .p-inputtext {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    font-size: 1.125rem;
+  }
+}
 
-    &:enabled:hover .p-button-icon {
-      color: $search-btn-background-color;
-    }
+.SearchBar .search-autocomplete .search-button {
+  &:enabled:hover {
+    background-color: $primary-btn-background-color;
+  }
+
+  &:enabled:hover .p-button-icon {
+    color: $search-btn-background-color;
   }
 }
