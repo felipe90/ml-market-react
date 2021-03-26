@@ -10,11 +10,14 @@ const ProductListPage = ({
   searchQuery,
   setProductsList,
   setCategories,
-  setMetaTags
+  setMetaTags,
 }) => {
   const itemsRequestService = new ItemsRequestService()
   let location = useLocation()
 
+  /**
+   * Get product list based on URL search param
+   */
   useEffect(() => {
     if (!location.search || location.state === location.search) {
       return
@@ -22,10 +25,17 @@ const ProductListPage = ({
     getProductList(new URLSearchParams(location.search).get('search'))
   }, [location.search])
 
+  /**
+   * Get product list when search query state changes
+   */
   useEffect(() => {
     getProductList(searchQuery)
   }, [searchQuery])
 
+  /**
+   * Get product list facade function
+   * @param {string} query
+   */
   const getProductList = (query) => {
     if (!query) {
       return
@@ -39,7 +49,7 @@ const ProductListPage = ({
         setMetaTags({
           title: `Ml-market - ${query}`,
           description: `Ml-market - ${query}`,
-          keywords: res.data.relatedCategories.join(',') 
+          keywords: res.data.relatedCategories.join(','),
         })
       })
       .catch((e) => {

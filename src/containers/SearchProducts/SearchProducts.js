@@ -15,6 +15,9 @@ const SearchProducts = ({ changeSearchQuery }) => {
   const [selectedSuggestion, setSelectedSuggestion] = useState(null)
   const [suggestions, setSuggestions] = useState(null)
 
+  /**
+   * Change selected suggestion based on search param which is at the end the autocomplete search value
+   */
   useEffect(() => {
     const params = new URLSearchParams(location.search)
     if (params.get('search')) {

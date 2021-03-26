@@ -15,10 +15,18 @@ const ProductPage = ({
   let location = useLocation()
   let { id } = useParams()
 
+  /**
+   * Get product list based on id query param
+   */
   useEffect(() => {
     getProduct(id)
   }, [location])
 
+  
+  /**
+   * Get product item facade function
+   * @param {string} productId
+   */
   const getProduct = (productId) => {
     if (!productId) {
       return
